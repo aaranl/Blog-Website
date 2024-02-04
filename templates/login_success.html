@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezbake</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='/images/ezINVERTED_colored.ico') }}">
+</head>
+
+<body>
+    <div>
+        <header class="taskbar">
+
+            <div class="logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="static/images/ezINVERTED_colored.png">
+                </a>
+            </div>
+
+            <nav class="navigation">
+                <ul>
+                    <li><a href="{{ url_for('login') }}" class="loginButton">
+                        Login
+                    </a>
+        
+                </ul>
+            </nav>
+
+        </header> 
+    </div>
+</body>
+
+</html>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ezbake</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="images/ezINVERTED_colored.ico" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='/images/ezINVERTED_colored.ico') }}">
 </head>
 
 <body>
@@ -14,17 +14,14 @@
         <header class="taskbar">
 
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/ezINVERTED_colored.png">
+                <a href="{{ url_for('index') }}">
+                    <img src="static/images/ezINVERTED_colored.png">
                 </a>
             </div>
 
             <nav class="navigation">
                 <ul>
-                    <li><a href="/about">TESTTTT</a></li>
-                    <li><a href="/information">TESTTT</a></li>
-                    <!-- Set this to be a login to a send to a backend that puts to a closed site -->
-                    <li><a href="login.html" class="loginButton">
+                    <li><a href="{{ url_for('login') }}" class="loginButton">
                         Login
                     </a>
         
