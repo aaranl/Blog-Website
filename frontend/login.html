@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezbake</title>
+    <link rel="stylesheet" href="css/styles.css"> 
+</head>
+
+<body>
+    <div>
+        <header class="taskbar">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/ezINVERTED_colored.png">
+                </a>
+            </div>
+
+            <nav class="navigation">
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/information">Information</a></li>
+                    <!-- Set this to be a login to a send to a backend that puts to a closed site -->
+                    <li><a href="login.html" class="loginButton">
+                        Login
+                    </a>
+        
+                </ul>
+            </nav>
+        </header> 
+        
+        <div class="login-modal">
+            <form class="login-form" action="{{ url_for('login') }}" method="post">
+                <h2>Welcome</h2>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
