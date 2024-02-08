@@ -50,8 +50,12 @@
 
 html {
     font-family: var(--font-mono);
-    overflow:hidden;
     
+}
+
+html, body {
+  height: auto;
+  min-height:100%;
 }
 
 body {
@@ -61,7 +65,6 @@ body {
       rgba(var(--background-start-rgb), 1),
       rgba(var(--background-end-rgb), 1)
     );
-    height: 100vh;
 }
   
 a {
@@ -90,6 +93,25 @@ a {
   width: 50px;
   height: auto;
 }
+
+.center {
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.center ul {
+  list-style-type: none;
+  padding: 0; 
+}
+
+.center ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
   
 .navigation ul {
     list-style: none;
@@ -99,7 +121,7 @@ a {
     padding-right: 10px; 
 }
   
-.navigation li {
+.navigation ul li {
     margin: 0;
 }
   
@@ -173,6 +195,30 @@ a {
   background-color: #2c2a31; 
   color: white;
 }
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.posts {
+  color: white;
+  width: 500px;
+  height: auto;
+  margin-bottom: 20px; 
+}
+
+.posts img  {
+  width: 100%;
+  height: 300px;
+  display: block;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
   
 /* Enable hover only on non-touch devices */
 /* @media (hover: hover) and (pointer: fine) {

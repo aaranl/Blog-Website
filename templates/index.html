@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="container">
         <header class="taskbar">
 
             <div class="logo">
@@ -18,19 +18,40 @@
                     <img src="static/images/ezINVERTED_colored.png">
                 </a>
             </div>
+            <!-- TODO : Give styling to this, give reference to tylers example  -->
+            <div class="center"> 
+                <ul> 
+                    <li><a>Posts</a>
+                    <!-- <li><a>People</a> -->
+                </ul>
+            </div>
 
             <nav class="navigation">
                 <ul>
                     <li><a href="{{ url_for('login') }}" class="loginButton">
                         Login
                     </a>
-        
                 </ul>
             </nav>
-
+            
         </header> 
 
+        <main id="content"> 
+            {% for post in posts %}
+                <div class="posts">
+                    <h2>{{ post.title }}</h2>
+                    <img src ="{{ post.image_url}}" alt="{{ post.title}}">
+                    <p>{{ post.content }}</p>
+                </div>
+            {% endfor %}
+        </main>
+
+        <div id ="loader" hidden>Loading more posts...</div>   
+
+
     </div>
+    <!-- TODO: Fix Infinite scroll right now it just loads all posts -->
+    <script src="{{ url_for('static', filename='js/infinite-scroll.js') }}"></script>
 </body>
 
 </html>
