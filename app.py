@@ -13,6 +13,15 @@ class Posts(db.Model):
     date_posted = db.Column(db.DateTime, nullable = False)
     image_url = db.Column(db.String(255), nullable=True)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "content": self.content,
+            "date_posted": self.date_posted.strftime("%Y-%m-%d %H:%M:%S"),
+            "image_url": self.image_url
+        }
+
 # Secret key for session management. Replace with a random key in production.
 app.secret_key = 'your_secret_key'
 
@@ -22,7 +31,7 @@ users = {'admin': 'password'}
 
 @app.route('/')
 def index():
-    initial_posts = Posts.query.order_by(Posts.date_posted.desc())
+    initial_posts = Posts.query.order_by(Posts.date_posted.desc()).limit(10).all()
     print(initial_posts)
     return render_template('index.html', posts = initial_posts)
 
@@ -43,8 +52,9 @@ def login_success():
 
 @app.route('/load-more-posts/<int:page>')
 def load_more_posts(page):
-    posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(page, 1, False).items
-    return jsonify([{'title' : post.title, 'content' : post.content, 'image_url' : post.image.url } for post in posts])
+    paginated_posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(page=page, per_page=10, error_out=False)
+    posts = paginated_posts.items
+    return jsonify([post.to_dict() for post in posts])
 
 
 with app.app_context():
