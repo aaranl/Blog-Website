@@ -1,5 +1,4 @@
-# Portfolio-Website
+# Blog-Wesbite
  
 
-Continous blog type posting, where us as ezbake members can post our projects we have made
-in kinda like a long style
+Continous blog type posting, where if you have a allowed account you can post your projects.
