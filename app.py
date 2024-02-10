@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask import jsonify
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your_database.db'
 db = SQLAlchemy(app)
+ph = PasswordHasher()
 
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -21,13 +24,21 @@ class Posts(db.Model):
             "date_posted": self.date_posted.strftime("%Y-%m-%d %H:%M:%S"),
             "image_url": self.image_url
         }
+    
+class Accounts(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(100), unique = True, nullable = False)
+    password_hashed = db.Column(db.String(255), nullable = True)
+
+    def set_password(self, password):
+        self.password_hashed = ph.hash(password)
+
+    def verify(self, password):
+        return ph.verify(self.password_hashed, password)
 
 # Secret key for session management. Replace with a random key in production.
 app.secret_key = 'your_secret_key'
 
-# Dummy user data 
-# TODO: Add in real ecryption login method
-users = {'admin': 'password'}
 
 @app.route('/')
 def index():
@@ -40,10 +51,14 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username in users and users[username] == password:
-            return redirect(url_for('login_success'))
+
+        user = Accounts.query.filter_by(username=username).first()
+
+        if user and user.verify(password): 
+            return redirect(url_for('login_success')) 
         else:
-            flash('Invalid credentials!')
+            flash('Invalid username or password')
+        
     return render_template('login.html')
 
 @app.route('/login_success')
