@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from argon2 import PasswordHasher
+from datetime import datetime
 from argon2.exceptions import VerifyMismatchError
 
 
@@ -70,6 +71,29 @@ def load_more_posts(page):
     paginated_posts = Posts.query.order_by(Posts.date_posted.desc()).paginate(page=page, per_page=10, error_out=False)
     posts = paginated_posts.items
     return jsonify([post.to_dict() for post in posts])
+
+
+@app.route('/create=post', methods=['POST'])
+def create_post():
+    title = request.form['title']
+    content = request.form['content']
+    image = request.files['image']
+    image_url = None
+
+    if image and allowed_file(image.filename):
+        # add stuff
+        pass
+
+    new_post = Posts(title = title, content = content, date_posted = datetime.utcnow(), image_url = image_url)
+    db.sessions.add(new_post)
+    db.session.commit()
+        
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
+
 
 
 with app.app_context():

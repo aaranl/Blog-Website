@@ -219,6 +219,83 @@ a {
   margin-bottom: 5px;
 }
 
+/* Post creation styles */
+
+.post-creation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: 20px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form h2 {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.post-form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.post-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.post-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.post-form input[type="file"] {
+  margin-bottom: 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+  width: auto;
+  flex-grow: 1;
+}
+.post-form button {
+  padding: 10px;
+  background-color: #50d4dd;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition-duration: var(--transition-duration);
+  margin-left: 10px;
+  white-space: nowrap; 
+}
+
+.post-form button:hover {
+  background-color: #2c2a31; 
+  color: white;
+}
+
+
+/* Post creation styles */
+
   
 /* Enable hover only on non-touch devices */
 /* @media (hover: hover) and (pointer: fine) {
